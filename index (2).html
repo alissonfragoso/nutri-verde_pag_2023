@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- Link para a biblioteca Bootstrap 5.3.1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Inclua o FontAwesome (v5.7.0) via CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        /* Estilos para a barra de navegação */
+
+        .navbar {
+            background-color: white !important;
+            /* Cor de fundo da barra de navegação em branco */
+
+            /* margem para o resto do html*/
+            padding-bottom: 20px;
+
+        }
+
+        /* Estilizar o link ativo */
+        .navbar-nav .nav-link {}
+
+
+
+        @font-face {
+            font-family: 'alivia';
+            src: url(/fontes/AliviaRegular.ttf) format('truetype');
+        }
+
+        #cabecalhoName {
+            font-family: alivia;
+        }
+
+        --------------------------------------------------------------------------------------------------------
+        /*titulo cards*/
+
+        h5.col-12 {
+            text-align: left;
+            margin-left: 15px;
+            /* Ajuste a margem conforme necessário */
+        }
+
+
+        -------------------------------------------------------------------------------------
+        /* style popup */
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #popup {
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .container-fluid {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            z-index: 9999;
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        .popup-content {
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+            cursor: pointer;
+        }
+
+        --------------------------------------------------------------------------------------------------------
+
+        /* Estilo personalizado para a postagem do blog */
+        .blog-post {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .text-container {
+            padding-left: 20px;
+            /* Espaçamento à esquerda para o conteúdo de texto */
+        }
+
+
+        -----------------------------------------------------------------------------------------------------------
+
+        /* Estilos para a seção de Atendimento */
+        .widget-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .widget p {
+            margin-bottom: 10px;
+        }
+
+        .widget i {
+            margin-right: 10px;
+            font-size: 18px;
+            color: #229A00;
+            /* Cor para os ícones */
+        }
+
+        /* Estilos para os links */
+        .widget-links ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .widget-links li {
+            margin-bottom: 5px;
+        }
+
+        .widget-links a {
+            text-decoration: none;
+            color: #229A00;
+            /* Cor para os links */
+        }
+
+
+        /* Estilos para o aviso no rodapé */
+
+        .aviso-rodape {
+            width: 100%;
+            padding-top: 20px;
+            margin-right: 0;
+        }
+
+
+        .aviso-rodape p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Estilizar os títulos das seções */
+        h3.widget-title {
+            color: #229A00;
+        }
+
+        /* Estilos para os links do rodapé */
+        .widget-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .widget-links li {
+            margin-bottom: 10px;
+        }
+
+        .widget-links a {
+            text-decoration: none;
+            color: #229A00;
+            transition: color 0.3s ease;
+        }
+
+        .widget-links a:hover {
+            color: #007bff;
+            /* Altere para a cor desejada no hover */
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+
+        <!----------------------------------------------------- Page Header ---------------------------------------------------------------->
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding-bottom: 40px; ">
+            <div class="container">
+                <a class="navbar-brand" href="index.html" style="color: #229A00; width: 100px; padding-left: 20px;"
+                    id="cabecalhoName">Nutri-Verde</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="sobre.html">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="contato.html">Contato</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+        <!-------------------------------------------------------- Primeira Postagem ------------------------------------------------------>
+
+
+        <div class="container">
+            <div class="blog-1"
+                style="display: flex; flex-direction: column; padding: 20px; margin-bottom: 60px; background-color: #f8f8f8; border-radius: 15px; ">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="blog-post"
+                            style="display: flex; flex-direction: row; align-items: center; background-color: ; padding: 20px; ">
+                            <div class="d-flex justify-content-center">
+                                <img src="../imagens/imagens posts/1.jpg" alt="Descrição da imagem" class="img-fluid"
+                                    style="border-radius: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12  d-flex align-items-center">
+                        <div class="text-container" style="padding: 20px;">
+                            <h1 style="color: #333; font-size: 24px; font-weight: bold; text-align: center;">Hidroponia
+                            </h1>
+                            <p style="color: #666; text-align: justify; font-size: 16px;">Hidroponia é uma técnica de
+                                cultivo de plantas que não envolve o uso de solo. Em vez disso, as plantas são
+                                cultivadas em soluções nutritivas à base de água, nas quais todos os nutrientes
+                                essenciais para o crescimento das plantas são fornecidos de maneira equilibrada. A
+                                palavra "hidroponia" deriva do grego "hydro" (água) e "ponos" (trabalho), o que
+                                significa "trabalho na água".
+                                Nesse método de cultivo, as raízes das plantas podem estar suspensas em meio líquido ou
+                                apoiadas em um substrato inerte, como perlita, vermiculita ou fibra de coco. A água é
+                                enriquecida com nutrientes como nitrogênio, fósforo, potássio e vários micronutrientes,
+                                garantindo que as plantas recebam tudo o que precisam para crescer saudáveis.
+                                A hidroponia é amplamente utilizada na produção de vegetais de folhas verdes, ervas,
+                                tomates, pimentões e outros produtos agrícolas em todo o mundo. Ela desempenha um papel
+                                importante na agricultura moderna, especialmente em regiões onde o solo é pobre em
+                                nutrientes ou o acesso à água é limitado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!---------------------------------------------- Cards ------------------------------------------------------------>
+
+
+        <section class="cards-1">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <!-- Card 1 -->
+                    <div class="col-md-3 mb-5">
+                        <!-- Conteúdo do Card 1 -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 1/rucula.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Rucula</h5>
+                                    <p class="card-text" style="text-align: justify;">A rúcula é um vegetal, possui
+                                        sabor picante como a mostarda, porém mais forte e amargo. É rica em fibras que
+                                        auxiliam e facilitam a digestão e o funcionamento do intestino.</p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Rucula Receitas')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-3 mb-5">
+                        <!-- Conteúdo do Card 2 -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 1/agriao.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Agrião</h5>
+                                    <p class="card-text" style="text-align: justify;">O agrião é uma verdura bastante
+                                        conhecida, dona de um sabor levemente picante e amargo, e capaz de fornecer
+                                        vitaminas que fazem muito bem para nossa saúde.</p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Agriao Receitas')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 (Manjericão) -->
+                    <div class="col-md-3 mb-5">
+                        <!-- Conteúdo do Card 3 -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 1/mangericao.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Manjericão</h5>
+                                    <p class="card-text" style="text-align: justify;"> O manjericão, é uma erva
+                                        aromática, suas folhas são utilizadas como tempero especialmente em países
+                                        tropicais da Ásia e na cozinha italiana com produtos naturais.</p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Manjericao Receitas')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 (Salsa) -->
+                    <div class="col-md-3 mb-5">
+                        <!-- Conteúdo do Card 4 -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 1/salsa.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Salsa</h5>
+                                    <p class="card-text" style="text-align: justify;">A salsa, está presente em todo o
+                                        mundo como hortaliça e condimento, ela ressalta o sabor da comida, é utilizada
+                                        como erva medicinal, graças às suas propriedades.</p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Salsa Receitas')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Camada semi-transparente para desativar a rolagem -->
+        <div id="overlay" class="overlay" style="display: none;"></div>
+
+        <!-- Pop-up -->
+        <div id="popup" class="popup"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; background-color: #f8f8f8; border: 2px solid #229A00; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); padding: 20px; max-width: 400px;">
+            <h2 id="popupTitle" style="color: #229A00; text-align: center; font-size: 24px;"></h2>
+            <p id="popupContent" style="text-align: justify; font-size: 16px;"></p>
+            <button onclick="fecharPopup()"
+                style="background-color: #229A00; color: #fff; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;">Fechar</button>
+        </div>
+
+        <!-------------------------------------------------------- Segunda Postagem ------------------------------------------------------>
+
+
+        <div class="container">
+            <div class="blog-2"
+                style="display: flex; flex-direction: column; padding: 20px; margin-bottom: 60px; background-color: #f8f8f8; border-radius: 15px;">
+                <div class="row">
+                    <!-- Texto à esquerda -->
+                    <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center">
+                        <div class="text-container" style="padding: 20px;">
+                            <h1 style="color: #333; font-size: 24px; font-weight: bold; text-align: center;"> Benefícios
+                                para a Saúde ao
+                                Consumir Alimentos Hidropônicos
+                            </h1>
+                            <p style="color: #666; text-align: justify; font-size: 16px;">
+                                <br>
+                                1. Nutrientes Concentrados
+                                <br>
+                                2. Ausência de Pesticidas e Herbicidas
+                                <br>
+                                3. Menor Risco de Contaminação Microbiana:
+                                <br>
+                                4. Melhor Qualidade e Sabor
+                                <br>
+                                5. Menor Necessidade de Uso de Água
+                                <br>
+                                6. Colheitas Mais Rápidas e Constantes
+                                <br>
+                                7. Baixo Teor de Gordura
+                                <br>
+                                8. Acesso a Produtos Locais e Sazonais
+                                <br>
+                                9. Maior Sustentabilidade
+                                <br>
+                                Conclusão:
+                                Os alimentos hidropônicos não apenas oferecem uma alternativa mais saudável aos
+                                alimentos convencionais, mas também apresentam um potencial significativo para melhorar
+                                a segurança alimentar global, reduzir a dependência de pesticidas e herbicidas, e
+                                permitir a produção sustentável em ambientes urbanos e limitados.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Imagem à direita -->
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="blog-post"
+                            style="display: flex; justify-content-center; align-items: center; padding: 20px;">
+                            <img src="../imagens/imagens posts/2.jpg" alt="Descrição da imagem" class="img-fluid"
+                                style="max-width: 100%; border-radius: 10px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!---------------------------------------------- Cards ------------------------------------------------------------>
+
+
+        <section class="cards-2" style="padding-bottom: 10px;">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <!-- Card 1 -->
+                    <div class="col-md-3 mb-5">
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 2/alface crespa.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Alface Crespa
+                                    </h5>
+                                    <p class="card-text" style="text-align: justify;">conhecida por suas folhas
+                                        onduladas e crocantes. Ela é uma opção popular de alface usada em saladas e
+                                        outros pratos devido à sua textura e sabor.
+                                    </p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup( 'Alface Crespa' )">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Card 2 -->
+
+                    <div class="col-md-3 mb-5">
+                        <!-- ... Conteúdo do Card 2 ... -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 2/alface lisa.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Alface Lisa
+                                    </h5>
+                                    <p class="card-text" style="text-align: justify;">Tem folhas com uma textura
+                                        suave e
+                                        delicada, são planas e não têm rugas. Tende a ter um sabor suave e delicado.
+                                    </p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Alface Lisa')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 mb-5">
+                        <!-- ... Conteúdo do Card 4 ... -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 2/alface mimosa.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Alface Mimosa
+                                    </h5>
+                                    <p class="card-text" style="text-align: justify;">Tem folhas mais grossas e
+                                        onduladas, possui uma textura mais crocante, tende a ter um sabor amargo e
+                                        crocante.</p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Alface Mimosa')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3 mb-5">
+                        <!-- ... Conteúdo do Card 5 ... -->
+                        <div class="card" style="border: 1px solid #0f560441;">
+                            <!-- Adicione a borda igual à cor do card-2 -->
+                            <!-- Image Background -->
+                            <div class="card-image-background" style="background-color: #0f560441;">
+                                <img src="../imagens/cards 2/alface romana.png" class="card-img-top" alt="...">
+                            </div>
+                            <!-- Text Background -->
+                            <div class="card-text-background" style="background-color: #f8f8f8;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="color: #229A00; text-align: center;">Alface Romana
+                                    </h5>
+                                    <p class="card-text" style="text-align: justify;">Suas folhas longas e firmes,
+                                        que
+                                        são ideais para enrolar e fazer wraps. Ela tem um
+                                        sabor
+                                        ligeiramente amargo.
+                                        <br>
+                                        <br>
+                                    </p>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="#" class="card-link" style="color: #229A00; text-decoration: none;"
+                                            onclick="mostrarPopup('Alface Romana')">Receitas</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------Rodapé---------------------------------------------- -->
+
+
+
+        <div class="aviso-rodape ">
+            <div class="row" style="border-top: solid 3px; padding-top: 15px; border-color: #229A00; background-color: #fff;">
+                <div class="col-lg-4">
+                    <section class="widget" style="padding-left: 5px;">
+                        <!-- Coluna de Atendimento -->
+                        <h3 class="widget-title" style="color: #229A00;">Atendimento</h3>
+                        <p>
+                            <i class="fas fa-phone" style="color: #229A00;"></i>
+                            (63) 99209-5449
+                        </p>
+                        <p class="no-print">
+                            <i class="fab fa-whatsapp" style="color: #229A00;"></i>
+                            <a href="https://api.whatsapp.com/send?phone=5563992095449" target="_blank"
+                                style="text-decoration: none; color: #333;" class="text-dark">(63) 99209-5449</a>
+                        </p>
+                        <p>
+                            <i class="fas fa-envelope" style="color: #229A00;"></i>
+                            <a href="mailto:folhaverdenfe@gmail.com" class="text-dark"
+                                style="text-decoration: none; color: #333;">nutriverde96@gmail.com</a>
+                        </p>
+                        <p class="text-dark">
+                            <i class="far fa-clock" style="color: #229A00;"></i>
+                            Horário de Atendimento:
+                        </p>
+                        <ul class="list-unstyled text-sm" style="margin-left: 30px;">
+                            <li>
+                                <p style="color: #333;" class="text-dark">Segunda-Sexta: 08:00 - 18:00</p>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-6 ml-md-auto">
+                    <section class="widget widget-links widget-footer-links" style="padding-left: 5px;">
+                        <!-- Coluna de Links -->
+                        <h3 class="widget-title">Links</h3>
+                        <ul>
+                            <li>
+                                <i class="fas fa-link"></i>
+                                <a href="index.html" class="text-dark"
+                                    style="text-decoration: none; color: #f8f8f8;">Início</a>
+                            </li>
+                            <li>
+                                <i class="fas fa-link"></i>
+                                <a href="contato.html" class="text-dark"
+                                    style="text-decoration: none; color: #f8f8f8;">Fale Conosco</a>
+                            </li>
+                            <li class="hidden-on-mobile">
+                                <i class="fas fa-link"></i>
+                                <a href="sobre.html" class="text-dark" style="text-decoration: none; color: #f8f8f8;">Sobre</a>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <section class="widget widget-links widget-footer-links" style="padding-left: 5px;">
+                        <!-- Coluna de Redes Sociais -->
+                        <h3 class="widget-title">Redes Sociais</h3>
+                        <ul>
+                            <li>
+                                <i class="fab fa-facebook" style="color: #229A00;"></i>
+                                <a href="https://www.facebook.com/login/?lang=pt" class="text-dark"
+                                    style="text-decoration: none; color: #333;">Facebook</a>
+                            </li>
+                        
+                            <li>
+                                <i class="fab fa-twitter" style="color: #229A00;"></i>
+                                <a href="https://twitter.com/login?lang=pt" class="text-dark"
+                                    style="text-decoration: none; color: #333;">Twitter</a>
+                            </li>
+                        
+                            <li class="no-print">
+                                <i class="fab fa-whatsapp" style="color: #229A00;"></i>
+                                <a href="https://api.whatsapp.com/send?phone=5563992095449" target="_blank"
+                                    style="text-decoration: none; color: #333;" class="text-dark">WhatsApp</a>
+                            </li>
+                        
+                            <li class="no-print">
+                                <i class="fab fa-instagram" style="color: #229A00;"></i>
+                                <a href="https://instagram.com/nutriverdehidroponia?igshid=MzRlODBiNWFlZA==" target="_blank"
+                                    style="text-decoration: none; color: #333;" class="text-dark">Instagram</a>
+                            </li>
+                        </ul>
+                        
+                    </section>
+                </div>
+            </div>
+        </div>
+        
+
+        <footer class="text-center py-3" style="background-color: #f8f8f89c; color: #333; margin: 0;">
+            &copy; 2023 Seu Site. Todos os direitos reservados.
+        </footer>
+
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        var scrollTop = 0;
+
+        function mostrarPopup(title) {
+            var popup = document.getElementById("popup");
+            var overlay = document.getElementById("overlay");
+            var popupTitle = document.getElementById("popupTitle");
+            var popupContent = document.getElementById("popupContent");
+
+            // Salve a posição atual da tela
+            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (title === 'Rucula Receitas') {
+                popupTitle.textContent = "Molho pesto de rúcula";
+                popupContent.innerHTML = "<br>Ingredientes:<br>1 maço de rúcula <br>1 maço de manjericão <br> 1 xícara de salsinha <br>1 xícara de nozes <br> ½ dente de alho gotinhas de limão <br> 4 colheres de sopa de azeite <br> 1 colher de chá de sal <br> ½ xícara de água <br> <br>Modo de Preparo <br> Lave bem as ervas, deixando de molho por 10 minutos em água e vinagre. Escorra e seque com um pano de prato ou papel toalha. Numa frigideira, torre levemente as nozes. Num multiprocessador ou liquidificador, junte todos os ingredientes, com exceção das nozes, e bata bem. Adicione mais água, se necessário. Por último, adicione as nozes e bata até ficar com pequenos pedaços de nozes. Acerte o tempero. Sirva quente ou frio.";
+
+            } else if (title === 'Agriao Receitas') {
+                popupTitle.textContent = "Salada de agrião com shoyu";
+                popupContent.innerHTML = "<br>Ingredientes:<br>1 maço de agrião<br>1/2 colher de café de óleo de gergelim<br>Molho shoyu<br>Gengibre ralado<br>Sementes de gergelim torrado<br><br>Modo de preparo:<br>Em um potinho, misture o molho shoyu, o óleo de gergelim e o gengibre;<br>Ferva uma panela com água, coloque o agrião e espere 30 segundos;<br>Escorra o agrião e passe em água fria. Esprema as folhas para retirar o máximo de água;<br>Corte o agrião amassado em pedaços, coloque em uma travessa e regue com o molho por cima;<br>Sirva com as sementes de gergelim para decorar.";
+            } else if (title === 'Manjericao Receitas') {
+                popupTitle.textContent = "Salada caprese";
+                popupContent.innerHTML = "<br> Ingredientes:<br> 3 muçarelas de búfala<br> 5 tomates maduros <br>3 ramos de manjericão <br>azeite a gosto <br>sal e pimenta-do-reino moída na hora a gosto <br> <br> Modo de preparo: <br> Lave, seque e corte cada tomate em 8 gomos: corte e descarte a tampa; apoie a parte cortada na tábua e corte o tomate em cruz, depois, em x, para formar 8 partes. Lave e seque bem as folhas de manjericão. Corte cada muçarela de búfala na metade e depois cada metade em 3 gomos.  Disponha numa travessa os gomos de tomate e de muçarela de búfala, tempere com o sal e a pimenta a gosto e regue com o azeite. Finalize com as folhas de manjericão e sirva a seguir. ";
+            } else if (title === 'Salsa Receitas') {
+                popupTitle.textContent = "Molho de salsa verde";
+                popupContent.innerHTML = "<br> Ingredientes: <br>  ½ xícara de salsa (salsinha) fresca <br>1 dente de alho <br>½ xícara de azeite de oliva <br>1 pitada de sal <br> <br> Modo de preparo: <br> Descasque o dente de alho, corte ao meio e retire o miolo dele. Separe as folhas do caule da salsa, lave e seque com papel absorvente.<br> Coloque o alho picado, as folhas de salsa, o azeite e uma pitada de sal no copo do liquidificador ou num copo alto, caso esteja usando o mixer, e bata muito bem. <br> Deixe este molho verde descansar por alguns minutos e estará pronto para servir como molho de churrasco, molho de macarrão e mais! Para preservá-lo, guarde-o na geladeira e retire-o alguns minutos antes de usá-lo.";
+            } if (title === 'Alface Crespa') {
+                popupTitle.textContent = "Salada caesar";
+                popupContent.innerHTML = "<br> INGREDIENTES: <br> 2 xícaras (chá) de pão amanhecido cortado em cubos de 1 cm <br> 2 colheres (sopa) de azeite <br> sal a gosto <br><br> MODO DE PREPARO:<br> Leve uma frigideira antiaderente ao fogo médio. Quando aquecer, regue com 2 colheres (sopa) de azeite e acrescente os cubos de pão. Tempere com sal e mantenha em fogo médio por cerca de 5 minutos, mexendo de vez em quando, até dourar.Transfira os croutons para uma travessa e deixe esfriar completamente antes de armazenar ou servir  eles ficam mais crocantes depois de frios.";
+            } else if (title === 'Alface Lisa') {
+                popupTitle.textContent = "Salada de folhas com kani e um toque de gengibre";
+                popupContent.innerHTML = " <br> Ingredientes: <br> 1/2 pé de alface americana <br> 1/2 maço de alface roxa <br> 1/2 maço de alface mimosa <br> 5 tomates secos (conservado no alho e no azeite) <br> 10 azeitonas <br> 4 tubetes de Kani Kama <br><br> <br>Molho:<br> 1/4 xícara (de chá) de azeite de oliva extra virgem <br> 3 colheres (de sopa) de suco de limão <br> 3 colheres (de sopa) de água filtrada <br> 1/2 colher (de chá) de sal <br> 1 colher (de café) de gengibre em pó <br> <br> Modo de Preparo:Lave e higienize as folhas. Seque bem. Arrume em um prato grande e raso ou bandeja as alfaces. Comece com a alface  mimosa, depois arrume as folhas de alface americana e por último a alface roxa. Assim você terá um destaque das cores diferentes da alface. Depois é só arrumar os tomates secos, as azeitonas e  o kani cortado em tiras.";
+            } else if (title === 'Alface Mimosa') {
+                popupTitle.textContent = "Salada de alface com maçã verde: ";
+                popupContent.innerHTML = "<br> INGREDIENTES:<br> 3 colheres (chá) de mostarda <br> 2 e meia colheres (chá) de açúcar <br> 2 colheres (sopa) de manteiga derretida <br> 2 ovos levemente batidos <br> meia xícara (chá) de creme de leite <br> 5 colheres (sopa) de vinagre de vinho branco <br> 2 sachês de Tempero SAZÓN® Saladas <br> 10 folhas de alface lisa <br> 2 xícaras (chá) de ramos de agrião <br> 1 maçã verde cortada em gomos <br> 1 mexerica média cortada em gomos ao meio <br> 8 tomates-cereja <br> 2 ramos de cebolinha verde cortados em rodelas <br> <br> MODO DE PREPARO: <br>Em uma panela pequena, coloque a mostarda, o açúcar, a manteiga, os ovos, o creme de leite, o vinagre e o Tempero SAZÓN®, e leve ao fogo médio, em banho-maria, para aquecer.Cozinhe, sem parar de mexer, por aproximadamente 5 minutos, ou até que o molho encorpe parcialmente. Transfira para uma tigela e leve para gelar.Em uma saladeira, disponha as folhas de alface, o agrião, a maçã, a mexerica e os tomates e, por último, a cebolinha.Regue com o molho e sirva em seguida.";
+            } else if (title === 'Alface Romana') {
+                popupTitle.textContent = "Receitas de Alface Romana";
+                popupContent.innerHTML = "<br>Ingredientes:<br> 1/2 maço de chicória <br> 1/2 maço de alface frisée <br> 1/2 pé de alface americana pequeno <br> 4 dentes de alho <br> 3 colheres (sopa) de azeite de oliva <br> 1 xícara (chá) de grão-de-bico em conserva <br> Sal a gosto <br><br> Modo de preparo: <br> Limpe e lave as folhas das verduras e seque-as. Reserve. Descasque os dentes de alho, corte-os em lâminas e leve ao fogo numa frigideira com o azeite de oliva. Frite-o, mexendo de vez em quando, por 2 minutos, ou até dourar. Adicione o sal e misture delicadamente. Retire do fogo e reserve. Numa saladeira, disponha as folhas, adicione o grão-de-bico e regue com o alho e o azeite de oliva.";
+            }
+
+            // Exibe o pop-up e a camada semi-transparente
+            popup.style.display = "block";
+            overlay.style.display = "block";
+
+            // Define o popup como container fluid
+            popup.classList.add("container-fluid");
+
+            // Desativa a rolagem do site
+            document.body.style.overflow = "hidden";
+
+            // Define o popup como position: fixed
+            popup.style.position = "fixed";
+
+            // Mantém a tela na mesma posição
+            window.scrollTo(0, scrollTop);
+        }
+
+        function fecharPopup() {
+            var popup = document.getElementById("popup");
+            var overlay = document.getElementById("overlay");
+
+            // Oculta o pop-up e a camada semi-transparente
+            popup.style.display = "none";
+            overlay.style.display = "none";
+
+            // Reativa a rolagem do site
+            document.body.style.overflow = "auto";
+
+            // Retorna a tela à posição original
+            window.scrollTo(0, scrollTop);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
