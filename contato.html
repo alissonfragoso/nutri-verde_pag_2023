@@ -297,16 +297,22 @@
                             </div>
                             <input type="hidden" name="replyTo" value="nutriverde96@gmail.com">
                             <input type="hidden" name="redirectTo"
-                                value="http://127.0.0.1:5500/site-senai/contato.html">
-                            <button type="submit" class="btn btn-success"
-                                style="background-color: #229A00;">Enviar</button>
+                                value="http://127.0.0.1:5500/contato.html">
+                            <button type="submit" class="btn btn-success" onclick="envioMensagem()"style="background-color: #229A00;">Enviar</button>
                         </form>
 
 
+                        <script>
+                            function envioMensagem() {
+                                alert("Formulário enviado com sucesso!");
+                                ;
+                                return false;
+            
+                            };
+                        </script>
 
 
 
-                        
                     </div>
 
                 </div>
